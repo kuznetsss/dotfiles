@@ -1,0 +1,130 @@
+" use 256 colors
+set t_Co=256
+" Plugin manager
+call plug#begin('~/.vim/plugged')
+
+	Plug 'junegunn/vim-plug'
+
+	" Color schemes
+	Plug 'vim-scripts/summerfruit256.vim'
+	Plug 'vim-scripts/pyte'
+	Plug 'tomasr/molokai'
+	Plug 'altercation/vim-colors-solarized'
+	" -----------------
+
+	" Airline
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+
+	" Lua completion
+	Plug 'xolox/vim-misc'
+	Plug 'xolox/vim-lua-ftplugin'
+
+	" Git
+	Plug 'airblade/vim-gitgutter'
+
+call plug#end()
+
+" Visual setting
+let g:airline_theme='powerlineish'
+set background=dark
+colorscheme molokai "desert256 solarized desert256
+
+" Tab width
+set tabstop=4
+set shiftwidth=4
+" Disable auto comment simbols insert
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+" always keep lines after cursor
+set scrolloff=5
+
+" Switch to russian language while in input mode or while in search mode by Ctrl+^. 
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+
+" copy line shift from previous line 
+set autoindent
+
+" always show status bar
+set laststatus=2
+
+" Setup encoding
+set encoding=utf-8
+set termencoding=utf-8
+
+" :split opens windows below 
+set splitbelow
+
+" remove compatible with vi
+set nocompatible
+" use space as window border
+set fillchars+=vert:\ 
+
+" Ignore letter size (capitalize or not) while search (for searching using capitalize insert \C in search request)
+set ignorecase
+" highlight search results
+set hlsearch
+" hightlight search results while typing 
+set incsearch
+
+" hightlight current line
+set cursorline
+
+" enable syntax hightlight
+syntax enable
+
+" enable pasting by mouse wheel
+set mouse=r
+
+" enable relative numbers
+set relativenumber
+
+" disable auto folding when open file
+set nofoldenable
+set foldmethod=indent
+
+" enable file type plugin
+filetype plugin on
+
+" disable youcomlete for latex
+let g:ycm_filetype_blacklist = {
+			\ 'latex' : 1,
+			\ 'plaintex' : 1,
+			\ 'tex' : 1
+			\}
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+"set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+"filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
+let g:Tex_GotoError = 0
+
+autocmd FileType tex call Tex_MakeMap("<Leader>ll", ":w <CR> <Plug>Tex_Compile", 'n', '<buffer>')
+autocmd FileType tex call Tex_MakeMap("<Leader>ll", "<ESC> :w <CR> <Plug>Tex_Compile", 'v', '<buffer>')
+
+let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
+
