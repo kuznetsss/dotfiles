@@ -1,4 +1,4 @@
-XTerm.termName: xterm
+XTerm.termName: xterm-256color
 XTerm.vt100.locale: true
 XTerm.vt100.saveLines: 12000
 XTerm.vt100.foreground: green
