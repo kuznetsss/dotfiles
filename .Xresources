@@ -3,6 +3,6 @@ XTerm.vt100.locale: true
 XTerm.vt100.saveLines: 12000
 XTerm.vt100.foreground: green
 XTerm.vt100.background: black
-XTerm.vt100.faceName: Liberation Mono:size=13:antialias=true
+XTerm.vt100.faceName: Droid Sans Mono:size=14:antialias=true
 XTerm.vt100.metaSendsEscape: true
 xterm*borderWidth: 0
