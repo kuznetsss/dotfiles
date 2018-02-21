@@ -20,13 +20,11 @@ call plug#begin('~/.vim/plugged')
 	Plug 'xolox/vim-misc'
 	Plug 'xolox/vim-lua-ftplugin'
 
-	" Youcompleteme
-	Plug 'Valloric/YouCompleteMe'
-
 	" Git
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-fugitive'
 
+	" NERDtree
 	Plug 'scrooloose/nerdtree'
 
 call plug#end()

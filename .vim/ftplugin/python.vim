@@ -1,3 +1,5 @@
+let &colorcolumn=join(range(81,999),",")
+
 " Python specific settings
 
 nnoremap <buffer> <F5> :w <bar> :!clear; python %<CR>
