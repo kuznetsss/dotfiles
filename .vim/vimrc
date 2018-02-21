@@ -23,6 +23,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'xolox/vim-misc'
 	Plug 'xolox/vim-lua-ftplugin'
 
+	" Youcompleteme
+	Plug 'Valloric/YouCompleteMe'
+
 	" Git
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-fugitive'
@@ -102,7 +105,9 @@ set foldmethod=indent
 " enable file type plugin
 filetype plugin on
 
-let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
+" Common key bindings
+nnoremap <F1> :NERDTreeToggle<CR>
