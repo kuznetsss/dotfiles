@@ -2,6 +2,9 @@ let &colorcolumn=join(range(81,999),",")
 
 " C++ filetype
 
+set tabstop=2
+set shiftwidth=2
+
 set foldmethod=syntax
 set makeprg=make\ -C\ build/
 
