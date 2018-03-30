@@ -30,6 +30,9 @@ call plug#begin('~/.vim/plugged')
 	" NERDtree
 	Plug 'scrooloose/nerdtree'
 
+	" Vim wiki
+	Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 " Visual setting
