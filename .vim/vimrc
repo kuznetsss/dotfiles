@@ -23,6 +23,9 @@ call plug#begin('~/.vim/plugged')
 	" Youcompleteme
     Plug 'Valloric/YouCompleteMe'
 
+	" Cmake autocompletion
+	Plug 'richq/vim-cmake-completion'
+
 	" Git
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-fugitive'
