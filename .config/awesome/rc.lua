@@ -275,7 +275,7 @@ globalkeys = awful.util.table.join(
 	{description="lock screen", group="client"}),
     awful.key({ }, "Print", function () awful.spawn.with_shell("scrot 'Screenshot_%Y_%m_%d_%H_%M_%S.png' -e 'mv $f ~/Pictures/'") end,
 	{description="make screenshot", group="client"}),
-    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("scrot 'Screenshot_%Y_%m_%d_%H_%M_%S.png' -s -e 'mv $f ~/Pictures/'") end,
+    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("sleep 0.2 && scrot 'Screenshot_%Y_%m_%d_%H_%M_%S.png' -s -e 'mv $f ~/Pictures/'") end,
 	{description="screenshot of chosen area", group="client"}),
     -- awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("~/Scripts/screenRecord/recordAndShare.sh") end,
 	-- {description="Record video of chosen area", group="client"}),
@@ -530,7 +530,6 @@ awful.rules.rules = {
 		properties = { floating = true, ontop = true } },
     { rule = {class = "Skype"}, properties = { tag = "9" } },
     { rule = {class = "Thunderbird"}, properties = { tag = "9" } },
-    { rule = {class = "Rocket.Chat+"}, properties = { tag = "8" } },
 
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -633,5 +632,4 @@ run_once("gxkb")
 run_once(terminal)
 run_once("google-chrome-stable", "", "chrome")
 run_once("thunderbird")
-run_once("rocketchat")
 run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
