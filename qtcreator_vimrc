@@ -1,0 +1,77 @@
+" Tabs settings
+set tabstop=2
+set softtabstop=0
+set expandtab
+set shiftwidth=2
+set smarttab
+" copy line shift from previous line 
+set autoindent
+
+set foldmethod=syntax
+
+" Disable auto comment simbols insert
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" always keep lines after cursor
+set scrolloff=5
+
+" Switch to russian language while in input mode or while in search mode by Ctrl+^. 
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+
+
+" always show status bar
+set laststatus=2
+
+" Setup encoding
+set encoding=utf-8
+set termencoding=utf-8
+
+" :split opens windows below 
+set splitbelow
+
+" remove compatible with vi
+set nocompatible
+" use space as window border
+set fillchars+=vert:\ 
+
+" Ignore letter size (capitalize or not) while search (for searching using capitalize insert \C in search request)
+set ignorecase
+" highlight search results
+set hlsearch
+" hightlight search results while typing 
+set incsearch
+
+" hightlight current line
+set cursorline
+
+" enable syntax hightlight
+syntax enable
+
+" enable pasting by mouse wheel
+set mouse=r
+
+" enable relative numbers
+set number relativenumber
+
+" disable auto folding when open file
+set nofoldenable
+set foldmethod=indent
+
+" cmakeRescan
+nnoremap <C-c>R :cmakeRescan<CR>
+" cmakeRun
+nnoremap <C-c>r :cmakeRun<CR>
+" findUsages
+nnoremap <C-f> :findUsages<CR>
+" switchHeaderSource
+nnoremap gs :switchHeaderSource<CR>
+" diffCurrentFile
+nnoremap <C-d> :diffCurrentFile<CR>
+" goBack
+nnoremap <C-h> :goBack<CR>
+" goForward
+nnoremap <C-l> :goForward<CR>
+" build
+nnoremap <C-b> :build<CR>
