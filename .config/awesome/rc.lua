@@ -18,6 +18,8 @@ vicious = require("vicious")
 -- Устанавливаем язык
 os.setlocale(os.getenv("LANG"))
 
+-- awful.spawn.with_shell("xrandr --output HDMI1 --auto --right-of HDMI2 --output HDMI2 --auto")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -48,7 +50,7 @@ end
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -273,9 +275,9 @@ globalkeys = awful.util.table.join(
 	
 	awful.key({ }, "Scroll_Lock", function () awful.spawn.with_shell("dm-tool lock") end,
 	{description="lock screen", group="client"}),
-    awful.key({ }, "Print", function () awful.spawn.with_shell("scrot 'Screenshot_%Y_%m_%d_%H_%M_%S.png' -e 'mv $f ~/Pictures/'") end,
+    awful.key({ }, "Print", function () awful.spawn.with_shell("maim > ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
 	{description="make screenshot", group="client"}),
-    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("sleep 0.2 && scrot 'Screenshot_%Y_%m_%d_%H_%M_%S.png' -s -e 'mv $f ~/Pictures/'") end,
+    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("maim -s -d 0.5 > ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
 	{description="screenshot of chosen area", group="client"}),
     -- awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("~/Scripts/screenRecord/recordAndShare.sh") end,
 	-- {description="Record video of chosen area", group="client"}),
@@ -415,7 +417,23 @@ clientkeys = awful.util.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize horizontally", group = "client"}),
+		awful.key({ modkey, 					}, "Up",
+			function () awful.spawn.with_shell("amixer set Master 5%+") end,
+				{description = "Up 5% master volume", group="system"}),
+		awful.key({ modkey, 					}, "Down",
+			function () awful.spawn.with_shell("amixer set Master 5%-") end,
+				{description = "Down 5% master volume", group="system"}),
+		awful.key({ modkey, 					}, "F10",
+			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end,
+				{description = "Spotify: Previous", group="system"}),
+		awful.key({ modkey, 					}, "F11",
+			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end,
+				{description = "Spotify: Play/Pause", group="system"}),
+		awful.key({ modkey, 					}, "F12",
+			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end,
+				{description = "Spotify: Next", group="system"})
+
 )
 
 -- Bind all key numbers to tags.
@@ -530,6 +548,7 @@ awful.rules.rules = {
 		properties = { floating = true, ontop = true } },
     { rule = {class = "Skype"}, properties = { tag = "9" } },
     { rule = {class = "Thunderbird"}, properties = { tag = "9" } },
+    { rule = {class = "RocketChat"}, properties = { tag = "9" } },
 
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -630,6 +649,14 @@ run_once("compton"," --inactive-dim 0.3 --vsync opengl --backend glx")
 run_once("unclutter")
 run_once("gxkb")
 run_once(terminal)
-run_once("google-chrome-stable", "", "chrome")
-run_once("thunderbird")
+run_once("vivaldi-stable", "", "vivaldi-bin")
+--run_once("google-chrome-stable", "", "chrome")
+--run_once("rocketchat-desktop")
 run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
+--run_once("thunderbird")
+run_once("birdtray")
+run_once("/usr/lib/geoclue-2.0/demos/agent", "", "agent")
+run_once("redshift")
+-- auto lock screen
+run_once("light-locker")
+run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")

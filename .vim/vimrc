@@ -44,8 +44,8 @@ set background=dark
 colorscheme molokai "desert256 solarized desert256
 
 " Tab width
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 " Disable auto comment simbols insert
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -115,3 +115,6 @@ let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
 " Common key bindings
 nnoremap <F1> :NERDTreeToggle<CR>
+
+" vimwiki
+let g:vimwiki_list = [ {'path':'~/Documents/vimwiki/'} ]

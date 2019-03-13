@@ -73,5 +73,7 @@ nnoremap <C-d> :diffCurrentFile<CR>
 nnoremap <C-h> :goBack<CR>
 " goForward
 nnoremap <C-l> :goForward<CR>
-" build
-nnoremap <C-b> :build<CR>
+" buildProject
+nnoremap <C-b> :buildProject<CR>
+" followSymbol
+nnoremap gf :followSymbol<CR>
