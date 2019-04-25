@@ -13,10 +13,10 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 --require("awful.hotkeys_popup.keys.vim")
 
-vicious = require("vicious")
+local vicious = require("vicious")
 
 -- Устанавливаем язык
-os.setlocale(os.getenv("LANG"))
+os.setlocale("ru_RU.UTF-8")
 
 -- awful.spawn.with_shell("xrandr --output HDMI1 --auto --right-of HDMI2 --output HDMI2 --auto")
 
@@ -145,7 +145,9 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local clock_widget = wibox.widget.textclock("%a %d %b (%m), %H:%M")
+local calendar_widget = awful.widget.calendar_popup.month()
+calendar_widget:attach(clock_widget, "tr")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -247,7 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
 			cpuwidget,
 			memwidget,
-            mytextclock,
+			clock_widget,
             s.mylayoutbox,
         },
     }
@@ -645,18 +647,18 @@ end
 awful.spawn.with_shell("numlockx on")
 --awful.spawn.with_shell("xrandr --output DVI-D-1 --auto --output HDMI-0 --auto --primary --left-of DVI-D-1")
 awful.spawn.with_shell("setxkbmap -layout us,ru -option grp:alt_shift_toggle")
-run_once("compton"," --inactive-dim 0.3 --vsync opengl --backend glx")
+run_once("compton","-b --inactive-dim 0.3 --vsync --backend glx")
 run_once("unclutter")
 run_once("gxkb")
 run_once(terminal)
-run_once("vivaldi-stable", "", "vivaldi-bin")
---run_once("google-chrome-stable", "", "chrome")
 --run_once("rocketchat-desktop")
-run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
+--run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
 --run_once("thunderbird")
-run_once("birdtray")
-run_once("/usr/lib/geoclue-2.0/demos/agent", "", "agent")
-run_once("redshift")
+--run_once("birdtray")
 -- auto lock screen
-run_once("light-locker")
-run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
+--run_once("light-locker")
+--run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
+
+run_once("google-chrome-stable", "", "chrome")
+--run_once("firefox")
+run_once("redshift", "-l 55.656196:37.668194")

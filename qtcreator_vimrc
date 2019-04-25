@@ -67,6 +67,8 @@ nnoremap <C-c>r :cmakeRun<CR>
 nnoremap <C-f> :findUsages<CR>
 " switchHeaderSource
 nnoremap gs :switchHeaderSource<CR>
+" followSymbol
+nnoremap gf :followSymbol<CR>
 " diffCurrentFile
 nnoremap <C-d> :diffCurrentFile<CR>
 " goBack

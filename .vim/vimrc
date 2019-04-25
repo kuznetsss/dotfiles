@@ -16,10 +16,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 
-	" Lua completion
-	Plug 'xolox/vim-misc'
-	Plug 'xolox/vim-lua-ftplugin'
-
 	" Youcompleteme
     Plug 'Valloric/YouCompleteMe'
 
@@ -36,8 +32,14 @@ call plug#begin('~/.vim/plugged')
 	" Vim wiki
 	Plug 'vimwiki/vimwiki'
 
+	" Lua
+	Plug 'xolox/vim-misc'
+	Plug 'xolox/vim-lua-ftplugin'
+
 	" Markdown preview
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+
+
 call plug#end()
 
 " Visual setting
@@ -64,6 +66,7 @@ set scrolloff=5
 
 " Switch to russian language while in input mode or while in search mode by Ctrl+^. 
 set keymap=russian-jcukenwin
+imap <C-l> <C-^>
 set iminsert=0
 set imsearch=0
 
@@ -111,9 +114,16 @@ set foldmethod=indent
 " enable file type plugin
 filetype plugin on
 
+" Vimwiki settings
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_filetype_blacklist = { 'lua': 1 }
+
+" Lua
+let g:lua_compiler_name = '/usr/bin/luac5.2'
 
 " Common key bindings
 nnoremap <F1> :NERDTreeToggle<CR>
