@@ -1,0 +1,21 @@
+source ~/.vim/vimrc
+" Code editing
+map gs :action GotoRelated<CR>
+map gf :action GotoDeclaration<CR>
+map cr :action ReformatCode<CR>
+map <C-h> :action Back<CR>
+map <C-l> :action Forward<CR>
+map <C-i> :action ParameterInfo<CR>
+imap <C-i> <ESC>:action ParameterInfo<CR>a
+
+" Git operations
+"map <A-g>c :action Git.Commit.And.Push.Executor<CR>
+
+
+" Build and run
+map <C-B> :action Build<CR>
+map <C-C>r :action CMake.ReloadCMakeProject<CR>
+
+map <C-t> :action ActivateTerminalToolWindow<CR>
+map <C-A-r> :source ~/.ideavimrc<CR>
+

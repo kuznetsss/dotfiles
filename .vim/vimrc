@@ -36,6 +36,8 @@ call plug#begin('~/.vim/plugged')
 	" Vim wiki
 	Plug 'vimwiki/vimwiki'
 
+	" Markdown preview
+	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 call plug#end()
 
 " Visual setting
@@ -117,4 +119,4 @@ let g:ycm_server_python_interpreter = '/usr/bin/python3'
 nnoremap <F1> :NERDTreeToggle<CR>
 
 " vimwiki
-let g:vimwiki_list = [ {'path':'~/Documents/vimwiki/'} ]
+let g:vimwiki_list = [ {'path':'~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'} ]
