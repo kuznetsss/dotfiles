@@ -18,6 +18,8 @@ local vicious = require("vicious")
 -- Устанавливаем язык
 os.setlocale("ru_RU.UTF-8")
 
+awful.spawn.with_shell("xrandr --output HDMI3 --auto --left-of HDMI1 --output HDMI1 --primary")
+
 -- awful.spawn.with_shell("xrandr --output HDMI1 --auto --right-of HDMI2 --output HDMI2 --auto")
 
 -- {{{ Error handling
@@ -654,11 +656,15 @@ run_once(terminal)
 --run_once("rocketchat-desktop")
 --run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
 --run_once("thunderbird")
---run_once("birdtray")
+run_once("birdtray")
 -- auto lock screen
---run_once("light-locker")
---run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
+run_once("light-locker")
+run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
 
-run_once("google-chrome-stable", "", "chrome")
+--run_once("google-chrome-stable", "", "chrome")
 --run_once("firefox")
+run_once("brave-dev", "", "brave")
 run_once("redshift", "-l 55.656196:37.668194")
+run_once("keepassxc")
+run_once("jetbrains-toolbox")
+run_once("slack")
