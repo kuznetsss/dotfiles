@@ -3,6 +3,7 @@
 #
 
 # If not running interactively, don't do anything
+export EDITOR=vim
 [[ $- != *i* ]] && return
 
 export HISTSIZE=10000
