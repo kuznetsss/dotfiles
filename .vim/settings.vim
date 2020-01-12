@@ -4,7 +4,7 @@ set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 
-" Disable auto comment simbols insert
+" Disable auto comment symbols insert
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 filetype plugin on
@@ -62,7 +62,13 @@ set wildmenu
 set spell
 set updatetime=500
 
+set shiftwidth=4
+set tabstop=4
+set expandtab
 
 " Change current directory to file directory
 autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 
+set undofile
+let &undodir = g:vim_config_dir . 'undo'
+set undolevels=5000

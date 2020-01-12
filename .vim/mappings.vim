@@ -1,6 +1,9 @@
 nnoremap <F2> :NERDTreeToggle<CR>
 inoremap <F2> <Esc>:NERDTreeToggle<CR>
 
+nnoremap <F3> :MundoToggle<CR>
+inoremap <F3> <Esc>:MundoToggle<CR>
+
 nnoremap <F12> :TagbarToggle<CR>
 
 nnoremap cr :Autoformat<CR>

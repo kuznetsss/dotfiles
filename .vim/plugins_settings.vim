@@ -53,6 +53,10 @@ let g:asyncrun_save = 1
 " CMake
 let g:cmake_export_compile_commands = 'ON'
 let g:cmake_ycm_symlinks = 1
+let g:cmake_build_type = 'RelWithDebInfo'
 " ------
 
+" Mundo
+let g:mundo_right = 1
+" ------
 

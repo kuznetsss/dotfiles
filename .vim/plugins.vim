@@ -46,6 +46,12 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" Spellchecking
 	Plug 'kamykn/spelunker.vim'
 
+	" Undo plugin
+	Plug 'simnalamburt/vim-mundo'
+
+	" Remove quickfix from buffers
+	Plug 'romainl/vim-qf'
+
 	" Git plugin
 	Plug 'tpope/vim-fugitive'
 	if has('nvim') || has('patch-8.0.902')
