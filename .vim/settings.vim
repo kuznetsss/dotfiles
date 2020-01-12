@@ -32,13 +32,13 @@ set nocompatible
 set ignorecase
 " highlight search results
 set hlsearch
-" hightlight search results while typing 
+" highlight search results while typing 
 set incsearch
 
-" hightlight current line
+" highlight current line
 set cursorline
 
-" enable syntax hightlight
+" enable syntax highlight
 syntax enable
 
 " set folding by syntax
@@ -59,4 +59,10 @@ colorscheme molokai "wombat256mod
 
 set wildmenu
 
+set spell
+set updatetime=500
+
+
+" Change current directory to file directory
+autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 

@@ -11,6 +11,9 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'tomasr/molokai'
 	Plug 'michalbachowski/vim-wombat256mod'
 
+	" Async run
+	Plug 'skywind3000/asyncrun.vim'
+
 	" Airline
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
@@ -40,14 +43,29 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" CtrlP
 	Plug 'ctrlpvim/ctrlp.vim'
 
+	" Spellchecking
+	Plug 'kamykn/spelunker.vim'
+
+	" Git plugin
+	Plug 'tpope/vim-fugitive'
+	if has('nvim') || has('patch-8.0.902')
+	  Plug 'mhinz/vim-signify'
+	else
+	  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+	endif
+
+	" Autoformat 
+	Plug 'Chiel92/vim-autoformat'
 	" C++ specific
 		" .h/.cpp switch
 		Plug 'derekwyatt/vim-fswitch'
 		" C++ highlighting
 		Plug 'octol/vim-cpp-enhanced-highlight'
 
+	" CMake
+	Plug 'pboettch/vim-cmake-syntax'
+	Plug 'vhdirk/vim-cmake'
 
-		
 
 
 call plug#end()
