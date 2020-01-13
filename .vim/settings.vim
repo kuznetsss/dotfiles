@@ -59,7 +59,6 @@ colorscheme molokai "wombat256mod
 
 set wildmenu
 
-set spell
 set updatetime=500
 
 set shiftwidth=4
