@@ -54,11 +54,8 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 
 	" Git plugin
 	Plug 'tpope/vim-fugitive'
-	if has('nvim') || has('patch-8.0.902')
-	  Plug 'mhinz/vim-signify'
-	else
-	  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-	endif
+
+    
 
 	" Autoformat 
 	Plug 'Chiel92/vim-autoformat'
@@ -72,7 +69,15 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'pboettch/vim-cmake-syntax'
 	Plug 'vhdirk/vim-cmake'
 
-
+    if filereadable(g:vim_config_dir . 'local_plugins.vim') 
+        exec 'source ' . g:vim_config_dir . 'local_plugins.vim'
+    else
+        if has('nvim') || has('patch-8.0.902')
+          Plug 'mhinz/vim-signify'
+        else
+          Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+        endif
+    endif
 
 call plug#end()
 

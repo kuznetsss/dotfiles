@@ -35,6 +35,8 @@ let  g:ycm_filetype_blacklist = {
       \ 'lua': 1
       \}
 set completeopt-=preview
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_clangd_args = ['--header-insertion=never']
 " ------
 
 " NERDTree 
@@ -49,8 +51,9 @@ let g:cpp_posix_standard = 1
 " ------
 
 " CtrlP
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)|.*build.*$', 'file': '\v\.(exe|so|dll)$',  }
-let g:ctrlp_root_markers = ['.git', 'compile_commands.json', '.clang_format']
+let g:ctrlp_root_markers = ['.git', 'compile_commands.json', '.clang-format']
 " ------
 
 " Spelunker
@@ -73,4 +76,3 @@ let g:cmake_build_type = 'RelWithDebInfo'
 " Mundo
 let g:mundo_right = 1
 " ------
-

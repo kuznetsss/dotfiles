@@ -50,12 +50,12 @@ set foldlevelstart=999
 set mouse=r
 
 set autoread
-set autowrite
+"set autowrite
 set number relativenumber
 set backspace=indent,eol,start
 
 set background=dark
-colorscheme molokai "wombat256mod  
+colorscheme wombat256mod " molokai   
 
 set wildmenu
 
@@ -71,3 +71,5 @@ autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 set undofile
 let &undodir = g:vim_config_dir . 'undo'
 set undolevels=5000
+
+au BufReadPost quickfix setlocal wrap
