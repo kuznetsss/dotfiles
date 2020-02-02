@@ -28,3 +28,6 @@ nnoremap <C-c>r :CMake<CR>
 nnoremap <C-b> :exec 'AsyncRun ' . expand(&makeprg)<CR>
 inoremap <C-b> <Esc>:exec 'AsyncRun ' . expand(&makeprg)<CR>
 
+nnoremap <leader>s :Startify<CR>
+nnoremap <leader>r :source ~/.vim/vimrc<CR>
+

@@ -1,8 +1,8 @@
 let g:vim_config_dir = expand('<sfile>:p:h') . '/'
 exec 'source ' . g:vim_config_dir . 'plugins.vim'
+
 exec 'source ' . g:vim_config_dir . 'settings.vim'
 exec 'source ' . g:vim_config_dir . 'mappings.vim'
-
 if filereadable(g:vim_config_dir . 'local.vim')
     exec 'source ' . g:vim_config_dir . 'local.vim'
 endif

@@ -20,7 +20,7 @@ let g:ycm_max_num_candidates = 15
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_filepath_completion_use_working_dir = 1
-let  g:ycm_filetype_blacklist = {
+let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
       \ 'notes': 1,
       \ 'markdown': 1,
@@ -33,6 +33,10 @@ let  g:ycm_filetype_blacklist = {
       \ 'leaderf': 1,
       \ 'mail': 1,
       \ 'lua': 1
+      \}
+let g:ycm_filepath_blacklist = {
+      \ 'html': 1,
+      \ 'jsx': 1
       \}
 set completeopt-=preview
 let g:ycm_confirm_extra_conf = 0
