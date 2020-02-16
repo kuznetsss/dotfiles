@@ -46,9 +46,6 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" Spellchecking
 	Plug 'kamykn/spelunker.vim'
 
-	" Undo plugin
-	Plug 'simnalamburt/vim-mundo'
-
 	" Remove quickfix from buffers
 	Plug 'romainl/vim-qf'
 

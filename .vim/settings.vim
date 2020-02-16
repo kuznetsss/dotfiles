@@ -76,3 +76,8 @@ set undolevels=5000
 au BufReadPost quickfix setlocal wrap
 
 set nospell
+
+if has('nvim') 
+    exec 'source ' . g:vim_config_dir . 'neovim.nvim'
+endif
+
