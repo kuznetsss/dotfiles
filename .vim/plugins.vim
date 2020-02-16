@@ -62,6 +62,7 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" C++ specific
 		" .h/.cpp switch
 		Plug 'derekwyatt/vim-fswitch'
+        Plug 'kuznetsss/shswitch'
 		" C++ highlighting
 		Plug 'octol/vim-cpp-enhanced-highlight'
 
