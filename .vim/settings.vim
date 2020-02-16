@@ -50,7 +50,8 @@ set foldlevelstart=999
 set mouse=r
 
 set autoread
-"set autowrite
+set autowrite
+set fsync
 set number relativenumber
 set backspace=indent,eol,start
 
@@ -73,3 +74,5 @@ let &undodir = g:vim_config_dir . 'undo'
 set undolevels=5000
 
 au BufReadPost quickfix setlocal wrap
+
+set nospell

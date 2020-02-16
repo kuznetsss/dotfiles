@@ -8,13 +8,14 @@ nnoremap <F12> :TagbarToggle<CR>
 
 nnoremap cr :Autoformat<CR>
 
-nnoremap <C-t> :terminal<CR>
-inoremap <C-t> <Esc>:terminal<CR>
+nnoremap <C-t> :split \| resize 20 \| terminal<CR>
+inoremap <C-t> <Esc>:split \| resize 20 \| terminal<CR>
 
 nnoremap gf :YcmCompleter GoTo<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap <C-n> :YcmCompleter RefactorRename 
-nnoremap gs :FSBelow<CR>
+"nnoremap gs :FSBelow<CR>
+nnoremap gs :SHSwitch<CR>
 
 nnoremap <C-c>c :call NERDComment(0,"toggle")<CR>
 nnoremap <C-k> :bnext<CR>
