@@ -1,9 +1,6 @@
 nnoremap <F2> :NERDTreeToggle<CR>
 inoremap <F2> <Esc>:NERDTreeToggle<CR>
 
-nnoremap <F3> :MundoToggle<CR>
-inoremap <F3> <Esc>:MundoToggle<CR>
-
 nnoremap <F12> :TagbarToggle<CR>
 
 nnoremap cr :Autoformat<CR>
@@ -24,12 +21,19 @@ nnoremap <C-x> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
-
 nnoremap <C-c>r :CMake<CR>
-nnoremap <C-b> :exec 'AsyncRun ' . expand(&makeprg)<CR>
-inoremap <C-b> <Esc>:exec 'AsyncRun ' . expand(&makeprg)<CR>
 
 inoremap <C-l> <C-^>
 nnoremap <leader>s :Startify<CR>
 nnoremap <leader>r :source ~/.vim/vimrc<CR>
 
+tnoremap <Esc> <C-\><C-n>
+
+function! FzfFindProjectFiles() 
+    let l:root_file = findfile(g:myfzf_root_flag, '.;')
+    if strlen(l:root_file) == 0
+        echo "Fzf: can't find root"
+    endif
+    exe 'FzfFiles ' . fnamemodify(l:root_file, ':h')
+endfunction
+nnoremap <C-p> :call FzfFindProjectFiles()<CR>

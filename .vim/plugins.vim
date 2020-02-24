@@ -41,13 +41,14 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'Valloric/YouCompleteMe'
 
 	" CtrlP
-	Plug 'ctrlpvim/ctrlp.vim'
+	"Plug 'ctrlpvim/ctrlp.vim'
+
+    " Fzf
+    Plug 'junegunn/fzf', { 'do': './install --bin' }
+    Plug 'junegunn/fzf.vim'
 
 	" Spellchecking
 	Plug 'kamykn/spelunker.vim'
-
-	" Undo plugin
-	Plug 'simnalamburt/vim-mundo'
 
 	" Remove quickfix from buffers
 	Plug 'romainl/vim-qf'
