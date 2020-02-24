@@ -20,3 +20,8 @@ fi
 
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
+alias vim='nvim'
+
+source ~/.bashrc_local
+
+export SSH_AUTH_SOCK=/tmp/ssh-agent.socket
