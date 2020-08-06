@@ -228,15 +228,15 @@ colors:
     # XTerm's default colors
    # Default colors
    primary:
-     background: '0x000000'
+     background: '0x070707'
      foreground: '0x00dd00'
    # Normal colors
    normal:
-     black:   '0x0000dd'
+     black:   '0x0033ff'
      red:     '0xcd0000'
      green:   '0x00cd00'
      yellow:  '0xcdcd00'
-     blue:    '0x0000bb'
+     blue:    '0x0075ff'
      magenta: '0xcd00cd'
      cyan:    '0x00cdcd'
      white:   '0xe5e5e5'

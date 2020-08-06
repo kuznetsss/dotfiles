@@ -1,5 +1,7 @@
 let g:vim_config_dir = expand('<sfile>:p:h') . '/'
-exec 'source ' . g:vim_config_dir . 'plugins.vim'
+if !exists('g:vscode')
+    exec 'source ' . g:vim_config_dir . 'plugins.vim'
+endif
 
 exec 'source ' . g:vim_config_dir . 'settings.vim'
 exec 'source ' . g:vim_config_dir . 'mappings.vim'
