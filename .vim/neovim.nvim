@@ -1,4 +1,5 @@
 autocmd TermOpen * startinsert
 autocmd TermOpen * setlocal nobuflisted
 autocmd TermOpen * setlocal bufhidden=hide
+
 packadd termdebug

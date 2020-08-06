@@ -60,7 +60,7 @@ colorscheme wombat256mod " molokai
 
 set wildmenu
 
-set updatetime=500
+set updatetime=300
 
 set shiftwidth=4
 set tabstop=4
@@ -81,3 +81,19 @@ if has('nvim')
     exec 'source ' . g:vim_config_dir . 'neovim.nvim'
 endif
 
+" For CoC
+if g:use_coc
+    " Give more space for displaying messages.
+    set cmdheight=2
+    " Don't pass messages to |ins-completion-menu|.
+    set shortmess+=c
+
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    if has("patch-8.1.1564")
+      " Recently vim can merge signcolumn and number column into one
+      set signcolumn=number
+    else
+      set signcolumn=yes
+    endif
+endif

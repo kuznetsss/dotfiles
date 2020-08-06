@@ -1,4 +1,8 @@
 let g:vim_config_dir = expand('<sfile>:p:h') . '/'
+
+let g:use_coc = 1
+
+
 exec 'source ' . g:vim_config_dir . 'plugins.vim'
 
 exec 'source ' . g:vim_config_dir . 'settings.vim'
