@@ -10,6 +10,7 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" Color schemes
 	Plug 'tomasr/molokai'
 	Plug 'michalbachowski/vim-wombat256mod'
+    Plug 'NLKNguyen/papercolor-theme'
 
 	" Async run
 	Plug 'skywind3000/asyncrun.vim'
@@ -37,8 +38,14 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" File tags
 	Plug 'majutsushi/tagbar'
 
-	" YouCompleteMe
-	Plug 'Valloric/YouCompleteMe'
+    if g:use_coc
+        " Coc
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    else
+        " YouCompleteMe
+        Plug 'Valloric/YouCompleteMe'
+    endif
+
 
 	" CtrlP
 	"Plug 'ctrlpvim/ctrlp.vim'
@@ -56,6 +63,11 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" Git plugin
 	Plug 'tpope/vim-fugitive'
 
+    "Indent line display
+    Plug 'Yggdroot/indentLine'
+
+    " Markdown preview
+    Plug 'iamcco/markdown-preview.vim'
     
 
 	" Autoformat 
@@ -72,7 +84,7 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'vhdirk/vim-cmake'
 
     if filereadable(g:vim_config_dir . 'local_plugins.vim') 
-        exec 'source ' . g:vim_config_dir . 'local_plugins.vim'
+        "exec 'source ' . g:vim_config_dir . 'local_plugins.vim'
     else
         if has('nvim') || has('patch-8.0.902')
           Plug 'mhinz/vim-signify'

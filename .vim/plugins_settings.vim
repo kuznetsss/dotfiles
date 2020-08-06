@@ -40,7 +40,7 @@ let g:ycm_filepath_blacklist = {
       \}
 set completeopt-=preview
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_clangd_args = ['--header-insertion=never']
+let g:ycm_clangd_args = ['--header-insertion=never', '-j=5', '--background-index']
 " ------
 
 " NERDTree 

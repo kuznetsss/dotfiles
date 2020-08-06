@@ -1,4 +1,6 @@
 let g:vim_config_dir = expand('<sfile>:p:h') . '/'
+let g:use_coc = 1
+
 if !exists('g:vscode')
     exec 'source ' . g:vim_config_dir . 'plugins.vim'
 endif
