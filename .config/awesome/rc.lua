@@ -16,11 +16,14 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local vicious = require("vicious")
 
 -- Устанавливаем язык
-os.setlocale("ru_RU.UTF-8")
+-- os.setlocale("ru_RU.UTF-8")
 
-awful.spawn.with_shell("xrandr --output HDMI3 --auto --left-of HDMI1 --output HDMI1 --primary")
+awful.spawn.with_shell("autorandr --change")
 
--- awful.spawn.with_shell("xrandr --output HDMI1 --auto --right-of HDMI2 --output HDMI2 --auto")
+--local lock_command = "i3lock -i ~/Pictures/Wallpapers/a841db075a0bd892d6258388f1dfacc1.png -t"
+--local lock_command = "env XSECURELOCK_PASSWORD_PROMPT=asterisks XSECURELOCK_DISCARD_FIRST_KEYPRESS=0 XSECURELOCK_SAVER=saver_blank XSECURELOCK_NO_COMPOSITE=1 xsecurelock"
+--local lock_command = "i3lock -i ~/Pictures/Wallpapers/a841db075a0bd892d6258388f1dfacc1.png -t"
+local lock_command = "light-locker-command -l"
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -53,7 +56,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "vim"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -143,6 +146,9 @@ cpuwidget:set_background_color("#494B4F")
 cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#40DDFF"} }})
 -- Register widget
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
+
+batteryWidget = wibox.widget.textbox()
+vicious.register(batteryWidget, vicious.widgets.bat, " Bat: $1$2% ", 17, "BAT0")
 
 
 -- {{{ Wibar
@@ -251,6 +257,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
 			cpuwidget,
 			memwidget,
+			batteryWidget,
 			clock_widget,
             s.mylayoutbox,
         },
@@ -277,11 +284,13 @@ globalkeys = awful.util.table.join(
     --awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
     --          {description = "go back", group = "tag"}),
 	
-	awful.key({ }, "Scroll_Lock", function () awful.spawn.with_shell("dm-tool lock") end,
+	awful.key({ }, "Scroll_Lock", function () awful.spawn.with_shell(lock_command) end,
 	{description="lock screen", group="client"}),
-    awful.key({ }, "Print", function () awful.spawn.with_shell("maim > ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
+	awful.key({ modkey, }, "q", function () awful.spawn.with_shell(lock_command) end,
+	{description="lock screen", group="client"}),
+    awful.key({ }, "Print", function () awful.spawn.with_shell("maim ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
 	{description="make screenshot", group="client"}),
-    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("maim -s -d 0.5 > ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
+    awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("maim -s -d 0.5  ~/Pictures/$(date +Screenshot_%Y_%m_%d_%H_%M_%S.png)") end,
 	{description="screenshot of chosen area", group="client"}),
     -- awful.key({ "Control" }, "Print", function () awful.spawn.with_shell("~/Scripts/screenRecord/recordAndShare.sh") end,
 	-- {description="Record video of chosen area", group="client"}),
@@ -397,6 +406,8 @@ clientkeys = awful.util.table.join(
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "s",      function (c) c.sticky = not c.sticky          end,
+              {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -423,20 +434,46 @@ clientkeys = awful.util.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"}),
 		awful.key({ modkey, 					}, "Up",
-			function () awful.spawn.with_shell("amixer set Master 5%+") end,
+			function () awful.spawn.with_shell("amixer -D pulse sset Master 5%+") end,
 				{description = "Up 5% master volume", group="system"}),
 		awful.key({ modkey, 					}, "Down",
-			function () awful.spawn.with_shell("amixer set Master 5%-") end,
+			function () awful.spawn.with_shell("amixer -D pulse sset Master 5%-") end,
 				{description = "Down 5% master volume", group="system"}),
 		awful.key({ modkey, 					}, "F10",
-			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end,
-				{description = "Spotify: Previous", group="system"}),
+			function () awful.spawn.with_shell("playerctl previous") end,
+				{description = "Player: Previous", group="system"}),
 		awful.key({ modkey, 					}, "F11",
-			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end,
-				{description = "Spotify: Play/Pause", group="system"}),
+			function () awful.spawn.with_shell("playerctl play-pause") end,
+				{description = "Player: Play/Pause", group="system"}),
 		awful.key({ modkey, 					}, "F12",
-			function () awful.spawn.with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end,
-				{description = "Spotify: Next", group="system"})
+			function () awful.spawn.with_shell("playerctl next") end,
+				{description = "Player: Next", group="system"}),
+
+				-- Laptop fn keys
+		awful.key({ }, "XF86MonBrightnessDown",
+			function () awful.spawn.with_shell("xbacklight -dec 5 ") end,
+				{description = "Down 5% display brightness", group="system"}),
+		awful.key({ }, "XF86MonBrightnessUp",
+			function () awful.spawn.with_shell("xbacklight -inc 5 ") end,
+				{description = "Up 5% display brightness", group="system"}),
+		awful.key({ }, "XF86AudioMute",
+			function () awful.spawn.with_shell("amixer -D pulse set Master toggle") end,
+				{description = "Up 5% master volume", group="system"}),
+		awful.key({ }, "XF86AudioRaiseVolume",
+			function () awful.spawn.with_shell("amixer -D pulse sset Master 5%+") end,
+				{description = "Up 5% master volume", group="system"}),
+		awful.key({ }, "XF86AudioLowerVolume",
+			function () awful.spawn.with_shell("amixer -D pulse sset Master 5%-") end,
+				{description = "Down 5% master volume", group="system"}),
+		awful.key({ modkey }, "F7",
+        function () 
+            awful.spawn.with_shell("autorandr --change")
+            awesome.restart()
+        end,
+            { description = "Change screen settings and restart Awesome", group="system"})
+
+
+
 
 )
 
@@ -547,13 +584,6 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
-	-- Set xzoom always floating and on the top
-    { rule = {icon_name = "xzoom"},
-		properties = { floating = true, ontop = true } },
-    { rule = {class = "Skype"}, properties = { tag = "9" } },
-    { rule = {class = "Thunderbird"}, properties = { tag = "9" } },
-    { rule = {class = "RocketChat"}, properties = { tag = "9" } },
-
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -648,23 +678,25 @@ end
 
 awful.spawn.with_shell("numlockx on")
 --awful.spawn.with_shell("xrandr --output DVI-D-1 --auto --output HDMI-0 --auto --primary --left-of DVI-D-1")
-awful.spawn.with_shell("setxkbmap -layout us,ru -option grp:alt_shift_toggle")
-run_once("compton","-b --inactive-dim 0.3 --vsync --backend glx")
+--awful.spawn.with_shell("setxkbmap -layout us,ru -option grp:alt_shift_toggle")
+-- run_once("compton","-b --inactive-dim 0.3 --vsync --backend glx")
+run_once("picom","-i 1 --no-fading-openclose --fade-in-step=1.0 --fade-out-step=1.0 -b --vsync --backend glx")
 run_once("unclutter")
 run_once("gxkb")
 run_once(terminal)
---run_once("rocketchat-desktop")
---run_once("sleep 2 && skypeforlinux", "", "skypeforlinux")
---run_once("thunderbird")
-run_once("birdtray")
 -- auto lock screen
-run_once("light-locker")
-run_once("xautolock", "-time 5 -locker \"light-locker-command -l\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
+run_once("light-locker", " --lock-on-suspend --lock-after-screensaver=10")
+--run_once("xautolock", "-time 5 -locker \"" .. lock_command .. "\" -notify 20 -notifier \"notify-send -t 20000 'Screen lock' 'Screen will be locked after 20 seconds'\"")
+--run_once("xss-lock", "-n /usr/lib/xsecurelock/dimmer -l -- " .. lock_command)
+awful.spawn.with_shell("xset s 300 10")
 
---run_once("google-chrome-stable", "", "chrome")
 --run_once("firefox")
-run_once("brave-dev", "", "brave")
 run_once("redshift", "-l 55.656196:37.668194")
-run_once("keepassxc")
-run_once("jetbrains-toolbox")
-run_once("slack")
+--run_once("keepassxc")
+--run_once("jetbrains-toolbox")
+run_once("yandex-browser-beta", "", "yandex_browser")
+run_once("nm-applet")
+run_once("telegram-desktop")
+run_once("blueman-tray")
+
+run_once("ssh-agent", "-a /tmp/ssh-agent.socket")
