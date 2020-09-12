@@ -44,7 +44,7 @@ if g:use_coc
     nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
     " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gf <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
@@ -65,6 +65,23 @@ if g:use_coc
 
     " Symbol renaming.
     nmap <leader>rn <Plug>(coc-rename)
+    augroup mygroup
+    autocmd!
+      " Setup formatexpr specified filetype(s).
+      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+      " Update signature help on jump placeholder.
+      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Applying codeAction to the selected region.
+    " Example: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap keys for applying codeAction to the current buffer.
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Apply AutoFix to problem on the current line.
+    nmap <leader>qf  <Plug>(coc-fix-current)
 else
     nnoremap gf :YcmCompleter GoTo<CR>
     nnoremap gr :YcmCompleter GoToReferences<CR>
@@ -92,8 +109,10 @@ function! FzfFindProjectFiles()
     let l:root_file = findfile(g:myfzf_root_flag, '.;')
     if strlen(l:root_file) == 0
         echo "Fzf: can't find root"
+        return
     endif
     exe 'FzfFiles ' . fnamemodify(l:root_file, ':h')
 endfunction
-nnoremap <C-p> :call FzfFindProjectFiles()<CR>
+nnoremap <space><space> :call FzfFindProjectFiles()<CR>
+nnoremap <C-p> :execute "FzfFiles " . expand("%:p:h")<CR>
 nnoremap <C-y> :FzfBuffers<CR>

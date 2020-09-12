@@ -25,10 +25,6 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	" Vim wiki
 	Plug 'vimwiki/vimwiki'
 
-	" Lua
-	Plug 'xolox/vim-misc'
-	Plug 'xolox/vim-lua-ftplugin'
-
 	" Comment line
 	Plug 'preservim/nerdcommenter'
 
@@ -41,14 +37,14 @@ call plug#begin(g:vim_config_dir . 'plugins/')
     if g:use_coc
         " Coc
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        " Semantic highlight
+        Plug 'jackguo380/vim-lsp-cxx-highlight'
+        " Fzf coc integration
+        "Plug 'antoinemadec/coc-fzf'
     else
         " YouCompleteMe
         Plug 'Valloric/YouCompleteMe'
     endif
-
-
-	" CtrlP
-	"Plug 'ctrlpvim/ctrlp.vim'
 
     " Fzf
     Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -74,7 +70,6 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'Chiel92/vim-autoformat'
 	" C++ specific
 		" .h/.cpp switch
-		Plug 'derekwyatt/vim-fswitch'
         Plug 'kuznetsss/shswitch'
 		" C++ highlighting
 		Plug 'octol/vim-cpp-enhanced-highlight'
@@ -83,8 +78,11 @@ call plug#begin(g:vim_config_dir . 'plugins/')
 	Plug 'pboettch/vim-cmake-syntax'
 	Plug 'vhdirk/vim-cmake'
 
+    " Snippets
+    Plug 'honza/vim-snippets'
+
     if filereadable(g:vim_config_dir . 'local_plugins.vim') 
-        "exec 'source ' . g:vim_config_dir . 'local_plugins.vim'
+        exec 'source ' . g:vim_config_dir . 'local_plugins.vim'
     else
         if has('nvim') || has('patch-8.0.902')
           Plug 'mhinz/vim-signify'
